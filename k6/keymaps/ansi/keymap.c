@@ -47,7 +47,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 };
 
 
-//colours hsv (for RGB FN mapping)
+//Colours hsv (for RGB layer Mapping)
 #define Red    {0,255,255}
 #define Orange {28,255,255}
 #define Yellow {43,255,255}
@@ -58,7 +58,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 #define White  {0,0,255}
 #define ______ {0,0,0}      //no colour
 
-// start of RGB FN mapping
+// Start of RGB Layer Mapping
 const uint8_t PROGMEM ledmap[][DRIVER_LED_TOTAL][3] = {
     /*  Row:    0        1        2        3        4        5        6        7        8        9        10       11       12       13       14       15    */
     [_FN1] = {  White,   White,   White,   White,   White,   White,   White,   White,   White,   White,   White,   White,   White,   ______,           ______, \
@@ -85,7 +85,7 @@ void set_layer_color(int layer) {
     }
   }
 }
-// End of RGB FN mapping
+// End of RGB Layer mapping
 
 
 // Dip Switch fuctions. 
@@ -122,7 +122,7 @@ bool led_update_user(led_t led_state) {
     return false;
 }
 
-// for both Caps Lock and RGB FN Colors
+// For both Caps Lock and RGB Layer Mapping
 void rgb_matrix_indicators_user(void) {
     if (caps) {
         rgb_matrix_set_color(30, 255, 0, 0);
