@@ -39,8 +39,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 //#define RGB_MATRIX_LED_FLUSH_LIMIT 0 // limits in milliseconds how frequently an animation will update the LEDs. 16 (16ms) is equivalent to limiting to 60fps (increases keyboard responsiveness)
 //#define RGB_MATRIX_MAXIMUM_BRIGHTNESS 255 // limits maximum brightness of LEDs to 200 out of 255. If not defined maximum brightness is set to 255
 #define RGB_MATRIX_STARTUP_MODE RGB_MATRIX_SOLID_COLOR
-#define RGB_MATRIX_STARTUP_HUE 127 // Sets the default hue value, if none has been set
-#define RGB_MATRIX_STARTUP_SAT 0   // Sets the default saturation value, if none has been set
+#define RGB_MATRIX_STARTUP_HUE 120 // Sets the default hue value, if none has been set
+#define RGB_MATRIX_STARTUP_SAT 255  // Sets the default saturation value, if none has been set
 #define RGB_MATRIX_STARTUP_VAL 255 // Sets the default brightness value, if none has been set
 #define RGB_MATRIX_STARTUP_SPD 63
 #define RGB_MATRIX_SPD_STEP 16
+// Currently set to default to Green HSV 120, 255, 255
