@@ -31,6 +31,34 @@ enum layer_names {
 // Mapping to each layer
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
+/*			                                    [_Base]	
+                +-------------------------------------------------------------------------------+-----+
+                | ESC |  1  |  2  |  3  | 4  |  5  | 6  |  7 |  8 |  9 |  0 |  - |  = | BACKSP  | DEL |
+                +-------------------------------------------------------------------------------+-----|
+                |  TAB    |  Q |  W |  E |  R |  T |  Y |  U |  I |  O |  P |  [ |  ] |   \     | HOME|
+                +-------------------------------------------------------------------------------+-----|
+                | CAPSLCK   |  A |  S |  D |  F |  G |  H |  J |  K |  L | ; | ' |  RETURN      | END |
+                +-------------------------------------------------------------------------+-----+-----|
+                | LSHIFT     |  Z |  X |  C |  V |  B |  N |  M | , | . |  / |    RSHIFT  |  UP | PSCR|
+                +-------------------------------------------------------------------------+-----+-----|
+                |LCTRL| LGUI| LALT |            SPACE            | RCTRL | FN | RATL| LFT | DWN | RGT |
+                +-------------------------------------------------------------------------------------+
+*/ 				
+/*			                                    [_FN1]	
+                +-------------------------------------------------------------------------------+-----+
+                | ~  | F1 | F2 | F3 | F4 | F5 | F6 | F7 | F8 | F9 | F10 | F11 | F12 |           |     |
+                +-------------------------------------------------------------------------------+-----|
+                |       |  M1 | M2 | M3 | M4 | M5 |   |    |    |    |    |    |    |           | PGU |
+                +-------------------------------------------------------------------------------+-----|
+                |         | VOD | VOU |   |   |   |    |    |    |    | SAD | SAI |             | PGD |
+                +-------------------------------------------------------------------------+-----+-----|
+                |          |    |    |    |    |    |    |    |     |MOD+ |MOD- |         | VAI | TOG |
+                +-------------------------------------------------------------------------+-----+-----|
+                |     |     |      |            RESET            |       |    |     | HUI | VAD | HUD |
+                +-------------------------------------------------------------------------------------+
+*/
+
+
  /*      Row:         0          1          2          3        4         5        6         7        8        9          10         11         12         13         14         15        */
       [_BASE] = { {   KC_GESC,   KC_1,      KC_2,      KC_3,    KC_4,     KC_5,    KC_6,     KC_7,    KC_8,    KC_9,      KC_0,      KC_MINS,   KC_EQL,    KC_BSPC,   KC_NO,     KC_DEL  },
                   {   KC_TAB,    KC_Q,      KC_W,      KC_E,    KC_R,     KC_T,    KC_Y,     KC_U,    KC_I,    KC_O,      KC_P,      KC_LBRC,   KC_RBRC,   KC_BSLASH, KC_NO,     KC_HOME },
@@ -69,21 +97,20 @@ const uint8_t PROGMEM ledmap[][DRIVER_LED_TOTAL][3] = {
 };
 
 void set_layer_color(int layer) {
-
-  for (int i = 0; i < DRIVER_LED_TOTAL; i++) {
-    HSV hsv = {
-      .h = pgm_read_byte(&ledmap[layer][i][0]),
-      .s = pgm_read_byte(&ledmap[layer][i][1]),
-      .v = pgm_read_byte(&ledmap[layer][i][2]),
-    };
-    if (!hsv.h && !hsv.s && !hsv.v) {
-        rgb_matrix_set_color( i, 0, 0, 0 );
-    } else {
-        RGB rgb = hsv_to_rgb( hsv );
-        float f = (float)rgb_matrix_config.hsv.v / UINT8_MAX;
-        rgb_matrix_set_color( i, f * rgb.r, f * rgb.g, f * rgb.b );
+    for (int i = 0; i < DRIVER_LED_TOTAL; i++) {
+        HSV hsv = {
+            .h = pgm_read_byte(&ledmap[layer][i][0]),
+            .s = pgm_read_byte(&ledmap[layer][i][1]),
+            .v = pgm_read_byte(&ledmap[layer][i][2]),
+        };
+        if (!hsv.h && !hsv.s && !hsv.v) {
+            rgb_matrix_set_color( i, 0, 0, 0 );
+        } else {
+            RGB rgb = hsv_to_rgb( hsv );
+            float f = (float)rgb_matrix_config.hsv.v / UINT8_MAX;
+            rgb_matrix_set_color( i, f * rgb.r, f * rgb.g, f * rgb.b );
+        }
     }
-  }
 }
 // End of RGB FN mapping
 
@@ -129,7 +156,7 @@ void rgb_matrix_indicators_user(void) {
     }
     switch (biton32(layer_state)) {
     case _FN1:
-      set_layer_color(_FN1);
-      break;
+        set_layer_color(_FN1);
+        break;
     }
 }
