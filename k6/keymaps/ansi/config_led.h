@@ -45,3 +45,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define RGB_MATRIX_STARTUP_SPD 63
 #define RGB_MATRIX_SPD_STEP 16
 // Currently set to default to Green HSV 120, 255, 255
+
+// Caps Lock Indicator Pin
+#define LED_CAPS_LOCK_PIN B9

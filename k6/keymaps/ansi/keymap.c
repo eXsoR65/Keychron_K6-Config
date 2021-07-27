@@ -16,12 +16,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 #include QMK_KEYBOARD_H
 
-bool caps = false;
-
-int caps_leds[] = {30};
-int caps_leds_size = sizeof(caps_leds) / sizeof(int);
-int led_index;
-
 // Layers
 enum layer_names {
     _BASE,
@@ -74,7 +68,6 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                }
 };
 
-
 //colours hsv (for RGB FN mapping)
 #define Red    {0,255,255}
 #define Orange {28,255,255}
@@ -96,6 +89,7 @@ const uint8_t PROGMEM ledmap[][DRIVER_LED_TOTAL][3] = {
                 ______,  ______,  ______,                             ______,                             ______,  ______,  ______,  Green,   Blue,    Green,  },
 };
 
+
 void set_layer_color(int layer) {
     for (int i = 0; i < DRIVER_LED_TOTAL; i++) {
         HSV hsv = {
@@ -113,7 +107,6 @@ void set_layer_color(int layer) {
     }
 }
 // End of RGB FN mapping
-
 
 // Dip Switch fuctions.
 void dip_switch_update_user(uint8_t index, bool active) {
@@ -135,28 +128,23 @@ void dip_switch_update_user(uint8_t index, bool active) {
     }
 }
 
-void keyboard_post_init_user(void) {
-    // Customise these values to desired behaviour
-    // debug_enable=true;
-    // debug_matrix=true;
-    // debug_keyboard=true;
-    // debug_mouse=true;
-}
+// Caps Lock Indicator this will caouse both RGB 30 and indicator B9 to trun red on Caps Lock.
+bool caps = false;
 
-// Caps Lock Led Indicator
 bool led_update_user(led_t led_state) {
     caps = led_state.caps_lock;
+        writePin(B9, led_state.caps_lock);
     return false;
 }
 
-// for both Caps Lock and RGB FN Colors
 void rgb_matrix_indicators_user(void) {
     if (caps) {
-        rgb_matrix_set_color(30, 255, 0, 0);
+    // (Pin, R, G, B), check config_led.c for the pin number
+    rgb_matrix_set_color(30, 255, 0, 0);
     }
     switch (biton32(layer_state)) {
-    case _FN1:
-        set_layer_color(_FN1);
-        break;
+        case _FN1:
+            set_layer_color(_FN1);
+            break;
     }
 }

@@ -57,15 +57,15 @@ void init(void) {
 }
 
 static void flush(void) {
-    for (int i = 0; i < LED_MATRIX_ROWS * LED_MATRIX_COLS; i++)
-        led_state[i] = new_led_state[i];
+	for (int i = 0; i < LED_MATRIX_ROWS * LED_MATRIX_COLS; i++)
+		led_state[i] = new_led_state[i];
 }
 
 void set_color(int index, uint8_t r, uint8_t g, uint8_t b) {
-    int corrected_index = led_pos[index];
-    new_led_state[corrected_index].r = r;
-    new_led_state[corrected_index].g = g;
-    new_led_state[corrected_index].b = b;
+	int corrected_index = led_pos[index];
+	new_led_state[corrected_index].r = r;
+	new_led_state[corrected_index].g = g;
+	new_led_state[corrected_index].b = b;
 }
 
 static void set_color_all(uint8_t r, uint8_t g, uint8_t b) {
@@ -79,6 +79,7 @@ const rgb_matrix_driver_t rgb_matrix_driver = {
     .set_color     = set_color,
     .set_color_all = set_color_all,
 };
+
 /*
 // byte order: R,B,G
 static uint8_t caps_lock_color[3] = { 0x00, 0x00, 0xFF };
