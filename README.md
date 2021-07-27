@@ -8,6 +8,7 @@ I have only included the files I have modified, so you will need to replace the 
 - `led_matrix.c` "Modified for Caps Lock indicator"
 - `kaymaps\ansi\keymap.c` Customized key layout, Caps Lock indicator, and Layer Lighting effect for FN"
 - `kaymaps\ansi\config_led.h` "Added the pin assignment for Caps Lock Indicator.
+- `kaymaps\ansi\config.h` "Defined FORCE NKey Rollover for it to work, since there currently no EEPROM support yet."
 
 A big thank you to the #keychrone Channel in [SonixQMK Discord](https://discord.gg/w6U7v4rw) community for helping me with getting my config the way it is.
 
